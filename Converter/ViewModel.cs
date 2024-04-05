@@ -40,17 +40,16 @@ namespace Converter
         public ViewModel()
         {
             model = new Model();
-            _ConvertCommand = new RelayCommand(GetNum);
+            _ConvertCommand = new RelayCommand(ConvertFromCtoF);
             OutputValue = _num.ToString();
         }
 
         public ICommand Command => _ConvertCommand;
 
-        public void GetNum(object o)
+        public void ConvertFromCtoF(object o)
         {
             double.TryParse(InputValue, out double num);
-            model.CtoF(num);
-            _num = num;
+            OutputValue = model.CtoF(num).ToString();
         }
     }
 }
