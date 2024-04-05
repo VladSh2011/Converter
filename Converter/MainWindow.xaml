@@ -18,7 +18,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBox Text="{Binding InputValue, Mode=TwoWay}" 
                  Width="300" Height="60" 
                  BorderThickness="2" BorderBrush="Black"
