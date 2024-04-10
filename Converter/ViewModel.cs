@@ -13,10 +13,13 @@ namespace Converter
     class ViewModel : BaseVM
     {
         private Model model;
-        private RelayCommand _ConvertCommand;
+        private RelayCommand _convertCommand;
         private string _inputValue;
         private string _outputValue;
         private double _num;
+        public IReadOnlyCollection<TemperatureUnit> Units { get; set; }
+        public TemperatureUnit SelectedUnit1 { get; set; }
+        public TemperatureUnit SelectedUnit2 { get; set; }
 
         public string InputValue
         {
@@ -40,16 +43,59 @@ namespace Converter
         public ViewModel()
         {
             model = new Model();
-            _ConvertCommand = new RelayCommand(ConvertFromCtoF);
+            _convertCommand = new RelayCommand(Convert);
             OutputValue = _num.ToString();
+            Units = new List<TemperatureUnit>(Enum.GetValues(typeof(TemperatureUnit)) as TemperatureUnit[]);
         }
 
-        public ICommand Command => _ConvertCommand;
+        public ICommand ConvertCommand => _convertCommand;
 
-        public void ConvertFromCtoF(object o)
+        public void Convert(object o)
         {
-            double.TryParse(InputValue, out double num);
-            OutputValue = model.CtoF(num).ToString();
+            if (SelectedUnit1 == SelectedUnit2)
+            {
+                OutputValue = InputValue;
+                return;
+            }
+            if (SelectedUnit1 == TemperatureUnit.Celsius)
+            {
+                if (SelectedUnit2 == TemperatureUnit.Fahrenheit)
+                {
+                    double.TryParse(InputValue, out _num);
+                    OutputValue = model.CtoF(_num).ToString();
+                }
+                else if (SelectedUnit2 == TemperatureUnit.Kelvin)
+                {
+                    double.TryParse(InputValue, out _num);
+                    OutputValue = model.CtoK(_num).ToString();
+                }
+            }
+            if (SelectedUnit1 == TemperatureUnit.Fahrenheit)
+            {
+                if(SelectedUnit2 == TemperatureUnit.Celsius)
+                {
+                    double.TryParse(InputValue, out _num);
+                    OutputValue = model.FtoC(_num).ToString();
+                }
+                else if(SelectedUnit2 == TemperatureUnit.Kelvin)
+                {
+                    double.TryParse(InputValue, out _num);
+                    OutputValue = model.FtoK(_num).ToString();
+                }
+            }
+            if(SelectedUnit1 == TemperatureUnit.Kelvin)
+            {
+                if(SelectedUnit2 == TemperatureUnit.Celsius)
+                {
+                    double.TryParse(InputValue, out _num);
+                    OutputValue = model.KtoC(_num).ToString();
+                }
+                else if (SelectedUnit2 == TemperatureUnit.Fahrenheit)
+                {
+                    double.TryParse(InputValue, out _num);
+                    OutputValue = model.KtoF(_num).ToString();
+                }
+            }
         }
     }
 }
