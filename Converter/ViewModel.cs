@@ -57,44 +57,44 @@ namespace Converter
                 OutputValue = InputValue;
                 return;
             }
-            if (SelectedUnit1 == TemperatureUnit.Celsius)
+            switch(SelectedUnit1)
             {
-                if (SelectedUnit2 == TemperatureUnit.Fahrenheit)
-                {
-                    double.TryParse(InputValue, out _num);
-                    OutputValue = model.CtoF(_num).ToString();
-                }
-                else if (SelectedUnit2 == TemperatureUnit.Kelvin)
-                {
-                    double.TryParse(InputValue, out _num);
-                    OutputValue = model.CtoK(_num).ToString();
-                }
-            }
-            if (SelectedUnit1 == TemperatureUnit.Fahrenheit)
-            {
-                if(SelectedUnit2 == TemperatureUnit.Celsius)
-                {
-                    double.TryParse(InputValue, out _num);
-                    OutputValue = model.FtoC(_num).ToString();
-                }
-                else if(SelectedUnit2 == TemperatureUnit.Kelvin)
-                {
-                    double.TryParse(InputValue, out _num);
-                    OutputValue = model.FtoK(_num).ToString();
-                }
-            }
-            if(SelectedUnit1 == TemperatureUnit.Kelvin)
-            {
-                if(SelectedUnit2 == TemperatureUnit.Celsius)
-                {
-                    double.TryParse(InputValue, out _num);
-                    OutputValue = model.KtoC(_num).ToString();
-                }
-                else if (SelectedUnit2 == TemperatureUnit.Fahrenheit)
-                {
-                    double.TryParse(InputValue, out _num);
-                    OutputValue = model.KtoF(_num).ToString();
-                }
+                case TemperatureUnit.Celsius:
+                    if (SelectedUnit2 == TemperatureUnit.Fahrenheit)
+                    {
+                        double.TryParse(InputValue, out _num);
+                        OutputValue = model.CtoF(_num).ToString();
+                    }
+                    else if (SelectedUnit2 == TemperatureUnit.Kelvin)
+                    {
+                        double.TryParse(InputValue, out _num);
+                        OutputValue = model.CtoK(_num).ToString();
+                    }
+                    break;
+                case TemperatureUnit.Fahrenheit:
+                    if (SelectedUnit2 == TemperatureUnit.Celsius)
+                    {
+                        double.TryParse(InputValue, out _num);
+                        OutputValue = model.FtoC(_num).ToString();
+                    }
+                    else if (SelectedUnit2 == TemperatureUnit.Kelvin)
+                    {
+                        double.TryParse(InputValue, out _num);
+                        OutputValue = model.FtoK(_num).ToString();
+                    }
+                    break;
+                case TemperatureUnit.Kelvin:
+                    if (SelectedUnit2 == TemperatureUnit.Celsius)
+                    {
+                        double.TryParse(InputValue, out _num);
+                        OutputValue = model.KtoC(_num).ToString();
+                    }
+                    else if (SelectedUnit2 == TemperatureUnit.Fahrenheit)
+                    {
+                        double.TryParse(InputValue, out _num);
+                        OutputValue = model.KtoF(_num).ToString();
+                    }
+                    break;
             }
         }
     }
